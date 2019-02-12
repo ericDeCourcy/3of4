@@ -1,7 +1,8 @@
 # 3of4
 Ethereum Contract where 3 of 4 betting pools win a share of the losing betting pool's ether
 
-Donation ETH address: 0xF1f328a013da8cf8061E420DF109ce1Ab5c7C2f1      <3
+Donation ETH address: 0xF1f328a013da8cf8061E420DF109ce1Ab5c7C2f1      
+<3
 
 This contract will allow users to bet on different pools, named pool 0, 1, 2, and 3. The users will need to buy "tickets" at a price of 0.01 ether per ticket.
 A random number will be selected in the range of 0 to 3. The pool indicated by this number is the loser, and each pool will proportionally split 30% of that pool's funds. The remaining funds will be payed to the contract owner (this is still in progress)
