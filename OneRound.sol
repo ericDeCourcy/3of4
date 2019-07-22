@@ -67,6 +67,9 @@ contract OneRound{
         //ensure that round has not finished
         require(!roundFinished);
         
+        //ensure that round has started
+        require(hasBeenInitiated);        
+        
         //ensure that the transaction has value above the min ticket price
         require(msg.value > ticketPrice);
         
