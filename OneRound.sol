@@ -43,6 +43,10 @@ contract OneRound{
     event rollDone(uint256 roll);
     event rollError(uint256 roll);
     
+    //for checking what the heck is wrong with setting the loser tickets
+    event rollIs(uint256);
+    event numLTixSet(uint256 LTix, uint256 Lpot);
+    
     //round seed 
     uint roundSeed = 0;
     
@@ -65,7 +69,7 @@ contract OneRound{
         require(!roundFinished);
         
         //ensure that round has started
-        require(hasBeenInitiated);        
+        require(hasBeenInitiated);
         
         //ensure that the transaction has value above the min ticket price
         require(msg.value > ticketPrice);
@@ -167,13 +171,14 @@ contract OneRound{
         roundFinished = true;
         
         //determine number of tickets in loser pot
-        if(roll > 2)
+        if(roll < 2)
         {   if(roll == 0)       {   loserTix = totalTix_0;  }
             else if(roll == 1)  {   loserTix = totalTix_1;  }   }
         else
         {   if(roll == 2)       {   loserTix = totalTix_2;  }
             else if (roll == 3) {   loserTix = totalTix_3;  }   
-            else                {   emit rollError(roll);   
+            else                {   emit rollError(roll); 
+                                    roundFinished = false;  
                                     return ROLL_NOT_HAPPENED;   }
         }
         
@@ -250,14 +255,26 @@ contract OneRound{
     }
     
     function getNumTix(uint256 pool) public view returns(uint256 numTix){
-        require(pool == 0 || pool == 1 || pool == 2 || pool == 3);
+        require(pool == 0 || pool == 1 || pool == 2 || pool == 3, "Not a valid betting pool number!");
     
         if(pool == 0)   {   return totalTix_0;  }
         else if(pool == 1)  {   return totalTix_1;  }
         else if(pool == 2)  {   return totalTix_2;  }
         else    {   return totalTix_3;  }
     }
-    
+
+    function getLoserTix() public view returns(uint256){
+        require(roundFinished, "Dice have not been rolled yet!");
+
+        return loserTix;
+    }
+
+    function getRoll() public view returns(uint256){
+        require(roundFinished, "Dice have not been rolled yet!");
+
+        return roll;
+    }
+
     //function emergency refund
         //gotta figure this out before final release
         //only owner
