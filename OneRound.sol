@@ -13,9 +13,6 @@ contract OneRound{
     uint256 totalTix_1 = 0;
     uint256 totalTix_2 = 0;
     uint256 totalTix_3 = 0;
-        
-    //total number of tickets bought, determined once when roll happens
-    uint256 totalTix_all = 0;
     
     //loser tix, determined on roll
     uint256 loserTix = 0;
@@ -168,9 +165,6 @@ contract OneRound{
         
         //set bool roundFinished to true
         roundFinished = true;
-        
-        //calculate the number of total tickets
-        totalTix_all = totalTix_0 + totalTix_1 + totalTix_2 + totalTix_3;
         
         //determine number of tickets in loser pot
         if(roll > 2)
