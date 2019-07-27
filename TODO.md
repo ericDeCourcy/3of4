@@ -9,3 +9,4 @@ TODO: add pay owner function
 TODO: add annoying thing to fix a tip-address into the pay owner function
 TODO: create an emergency refund mechanism
 TODO: check that Readme still applies
+TODO: ensure re-entrancy cannot happen with payout function
